@@ -1,0 +1,25 @@
+# test_ciphers
+
+test_ciphers implementation to test sha256, aes256, rsa, base64 on local PC.
+
+# generate a private.key
+openssl genrsa -out private.key 512
+
+# output publick from one special private key
+openssl rsa -pubout -in private.key -out public.key
+
+# rsa encode
+openssl rsautl -encrypt -inkey public.key -pubin -out cipherOut.txt -in plainIn.txt
+
+# rsa decode
+openssl rsautl -decrypt -inkey private.key  -out plianOut.txt -in cipherIn.txt
+
+# aes256 encode
+openssl enc -e -aes-256-cbc -K 5e884898da28047151d0e56f8dc62927 -iv 6bbda7892ad344e06c31e64564a69a9a -in plainIn.txt -out cipherOut.txt
+
+# aes256 decode
+openssl enc -d -aes-256-cbc -K 5e884898da28047151d0e56f8dc62927 -iv 6bbda7892ad344e06c31e64564a69a9a -in cipherIn.txt -out plianOut.txt
+
+
+#refer to https://github.com/mdp/gibberish-aes
+#refer to https://github.com/travist/jsencrypt
